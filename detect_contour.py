@@ -32,19 +32,19 @@ while True:
     contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
     # Iterate over all contours
-    for contour in contours:
+    #for contour in contours:
         # Approximate the contour to a circle
-        epsilon = 0.03 * cv2.arcLength(contour, True)
-        approx = cv2.approxPolyDP(contour, epsilon, True)
+        #epsilon = 0.03 * cv2.arcLength(contour, True)
+        #approx = cv2.approxPolyDP(contour, epsilon, True)
 
         # Check if the contour is a circle (close approximation you can decrease 8 to detect smaller circles)
-        if len(approx) >= 4:
-            (x, y), radius = cv2.minEnclosingCircle(contour)
-            center = (int(x), int(y))
-            radius = int(radius)
+        #if len(approx) >= 4:
+    (x, y), radius = cv2.minEnclosingCircle(max(contours, key=cv2.contourArea))
+    center = (int(x), int(y))
+    radius = int(radius)
 
-            # Draw a circle around the detected object
-            cv2.circle(frame, center, radius, (0, 255, 255), 4)
+        # Draw a circle around the detected object
+    cv2.circle(frame, center, radius, (0, 255, 255), 4)
 
     # Display the frame with the detected circle
     cv2.imshow('Video', frame)
